@@ -5,18 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoomResponse {
-    private Long roomId;
-    private String number;
-    private Long places;
-    private Long freePlaces;
+public class CheckInResponse {
+    private String credentials;
     private String dormitory;
+    private String address;
+    private String room;
+    private String dateIn;
+    private String dateOut;
+    private Boolean active;
+    private Long checkInId;
+    private String email;
     private String gender;
-    private List<String> students;
 }

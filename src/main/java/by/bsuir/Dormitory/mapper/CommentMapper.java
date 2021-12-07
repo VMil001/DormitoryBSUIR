@@ -27,9 +27,10 @@ public abstract class CommentMapper {
     @Mapping(target = "dormitory", expression = "java(getDormitory(commentRequest.getDormitoryId()))")
     public abstract Comment map(CommentRequest commentRequest);
 
-    @Mapping(target = "user", source = "comment.user.username")
-    @Mapping(target = "dormitory", source = "comment.dormitory.name")
+    @Mapping(target = "credentials", expression = "java(comment.getUser().getCredentials())")
     @Mapping(target = "date", expression = "java(getDate(comment.getDate()))")
+    @Mapping(target = "role", expression = "java(comment.getUser().getRole().getType())")
+    @Mapping(target = "imgURL", source = "comment.user.imgURL")
     public abstract CommentResponse mapToDto(Comment comment);
 
     Date getCurrentDate() {

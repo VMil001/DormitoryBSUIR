@@ -39,6 +39,6 @@ public class Right implements Comparable<Right> {
 
     @Override
     public int compareTo(Right o) {
-        return factor.compareTo(o.factor);
+        return o.factor.compareTo(this.factor);
     }
 }

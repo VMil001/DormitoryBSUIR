@@ -38,6 +38,7 @@ public class User {
     private Date registerDate;
     private Boolean active;
     private Boolean verified;
+    private String imgURL;
 
     private String firstName;
     private String lastName;
@@ -48,12 +49,6 @@ public class User {
     private String groupNumber;
     private String faculty;
     private Integer course;
-
-    @ManyToOne
-    private Dormitory dormitory;
-
-    @ManyToOne
-    private Room room;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -133,5 +128,9 @@ public class User {
     @Override
     public int hashCode() {
         return 0;
+    }
+
+    public String getCredentials() {
+        return lastName + " " + firstName + " " + patronymic;
     }
 }

@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class DocumentRequest {
     private Long rightId;
     private Long privilegeId;
-    private Long userId;
+    private Long applicationId;
     private String note;
 }

@@ -15,23 +15,25 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PasswordRecovery {
+public class DormitoryImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long passwordRecoveryId;
+    private Long dormitoryImageId;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
+    private Dormitory dormitory;
 
-    private Long number;
+    @Lob
+    @Column( length = 100000 )
+    private String url;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        PasswordRecovery that = (PasswordRecovery) o;
-        return passwordRecoveryId != null && Objects.equals(passwordRecoveryId, that.passwordRecoveryId);
+        DormitoryImage that = (DormitoryImage) o;
+        return dormitoryImageId != null && Objects.equals(dormitoryImageId, that.dormitoryImageId);
     }
 
     @Override

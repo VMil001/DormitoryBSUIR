@@ -18,5 +18,13 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 
     List<Application> findAllByStatusIn(List<Application.Status> statuses);
 
-    Optional<Application> findByUser(User user);
+    List<Application> findAllByStatusNotIn(List<Application.Status> statuses);
+
+    List<Application> findAllByUserOrderByDateDesc(User user);
+
+    List<Application> findAllByStatusOrderByDate(Application.Status status);
+
+    List<Application> findAllByStatusOrderByNumber(Application.Status status);
+
+    Optional<Application> findFirstByUserOrderByDateDesc(User user);
 }

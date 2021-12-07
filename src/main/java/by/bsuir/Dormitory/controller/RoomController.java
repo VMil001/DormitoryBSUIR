@@ -1,6 +1,7 @@
 package by.bsuir.Dormitory.controller;
 
 import by.bsuir.Dormitory.dto.request.RoomRequest;
+import by.bsuir.Dormitory.dto.request.UserRoomRequest;
 import by.bsuir.Dormitory.dto.response.RoomResponse;
 import by.bsuir.Dormitory.service.RoomService;
 import lombok.AllArgsConstructor;
@@ -92,10 +93,33 @@ public class RoomController {
                 .body(roomService.getAllFreeRoomsByDormitoryAndGender(dormitoryId, genderName));
     }
 
-    @GetMapping("/by-number/{number}/is-present")
-    public ResponseEntity<Boolean> isRoomPresent(@PathVariable String number) {
+    @GetMapping("/current")
+    public ResponseEntity<List<RoomResponse>> getAllCurrent() {
         return status(HttpStatus.OK)
-                .body(roomService.isRoomPresent(number));
+                .body(roomService.getAllCurrent());
     }
 
+    @GetMapping("/current/free-places/count")
+    public ResponseEntity<Long> countAllCurrentFreePlaces() {
+        return status(HttpStatus.OK)
+                .body(roomService.countAllCurrentFreePlaces());
+    }
+
+    @GetMapping("/current/places/count")
+    public ResponseEntity<Long> countAllCurrentPlaces() {
+        return status(HttpStatus.OK)
+                .body(roomService.countAllCurrentPlaces());
+    }
+
+    @PostMapping("/student-room")
+    public ResponseEntity<Void> saveStudentRoom(@RequestBody UserRoomRequest userRoomRequest) {
+        roomService.saveStudentRoom(userRoomRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/by-number/{number}/by-dormitory/{dormitoryId}")
+    public ResponseEntity<RoomResponse> getRoomByNumber(@PathVariable String number, @PathVariable Long dormitoryId) {
+        return status(HttpStatus.OK)
+                .body(roomService.getByNumberAndDormitory(number, dormitoryId));
+    }
 }

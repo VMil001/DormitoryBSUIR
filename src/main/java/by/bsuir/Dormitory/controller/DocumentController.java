@@ -42,4 +42,10 @@ public class DocumentController {
         documentService.save(documentRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/by-application/{applicationId}")
+    public ResponseEntity<List<DocumentResponse>> getAllByApplication(@PathVariable Long applicationId) {
+        return status(HttpStatus.OK)
+                .body(documentService.getAllByApplication(applicationId));
+    }
 }

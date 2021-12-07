@@ -2,6 +2,8 @@ package by.bsuir.Dormitory.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -27,7 +29,8 @@ public class Document implements Comparable<Document>{
     private String note;
 
     @ManyToOne
-    private User user;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Application application;
 
     @Override
     public boolean equals(Object o) {

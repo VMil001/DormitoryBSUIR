@@ -22,13 +22,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     void deleteByUsername(String username);
 
-    long countByRoom(Room room);
 
-    List<User> findAllByRoom(Room room);
-
-    List<User> findAllByRoomNotNull();
-
-    List<User> findAllByRoomNull();
-
-    List<User> findAllByDormitoryAndRoomNull(Dormitory dormitory);
 }

@@ -13,4 +13,7 @@ public class DormitoryResponse {
     private Long dormitoryId;
     private String name;
     private String address;
+    private Long freePlaces;
+    private String info;
+    private String imageURL;
 }

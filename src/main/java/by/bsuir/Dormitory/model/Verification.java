@@ -2,6 +2,8 @@ package by.bsuir.Dormitory.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,8 +21,11 @@ public class Verification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long verificationId;
     private String token;
+
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
+    
     private Date expiryDate;
 
     @Override

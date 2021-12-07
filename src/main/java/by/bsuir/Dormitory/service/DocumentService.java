@@ -2,9 +2,12 @@ package by.bsuir.Dormitory.service;
 
 import by.bsuir.Dormitory.dto.request.DocumentRequest;
 import by.bsuir.Dormitory.dto.response.DocumentResponse;
+import by.bsuir.Dormitory.exception.ApplicationNotFoundException;
 import by.bsuir.Dormitory.exception.DocumentNotFoundException;
 import by.bsuir.Dormitory.mapper.DocumentMapper;
+import by.bsuir.Dormitory.model.Application;
 import by.bsuir.Dormitory.model.Document;
+import by.bsuir.Dormitory.repository.ApplicationRepository;
 import by.bsuir.Dormitory.repository.DocumentRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +25,11 @@ import static java.util.stream.Collectors.toList;
 public class DocumentService {
 
     private final DocumentRepository documentRepository;
+    private final ApplicationRepository applicationRepository;
 
     private final DocumentMapper documentMapper;
+
+    private final ApplicationService applicationService;
 
     @Transactional(readOnly = true)
     public List<DocumentResponse> getAll() {
@@ -47,5 +53,22 @@ public class DocumentService {
     public void save(DocumentRequest documentRequest) {
         Document document = documentMapper.map(documentRequest);
         documentRepository.save(document);
+        applicationService.recalculateQueue();
+    }
+
+    @Transactional(readOnly = true)
+    public List<DocumentResponse> getAllByApplication(Long applicationId) {
+        Application application = applicationRepository.findById(applicationId)
+                .orElseThrow(() -> new ApplicationNotFoundException(applicationId));
+
+        return getAllByApplication(application);
+    }
+
+    @Transactional(readOnly = true)
+    public List<DocumentResponse> getAllByApplication(Application application) {
+        return documentRepository.findAllByApplication(application)
+                .stream()
+                .map(documentMapper::mapToDto)
+                .collect(toList());
     }
 }

@@ -48,4 +48,14 @@ public class AuthController {
         refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
         return ResponseEntity.status(HttpStatus.OK).body("Refresh Token Deleted Successfully");
     }
+
+    @GetMapping("/username-exists/{username}")
+    public ResponseEntity<Boolean> usernameExists(@PathVariable String username) {
+        return ResponseEntity.status(HttpStatus.OK).body(authService.usernameExists(username));
+    }
+
+    @GetMapping("/email-exists/{email}")
+    public ResponseEntity<Boolean> emailExists(@PathVariable String email) {
+        return ResponseEntity.status(HttpStatus.OK).body(authService.emailExists(email));
+    }
 }

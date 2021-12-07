@@ -2,6 +2,8 @@ package by.bsuir.Dormitory.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -22,6 +24,7 @@ public class Room {
     private Long places;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Dormitory dormitory;
 
     @Enumerated(EnumType.STRING)

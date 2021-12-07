@@ -3,9 +3,12 @@ package by.bsuir.Dormitory.service;
 import by.bsuir.Dormitory.dto.request.PrivilegeRequest;
 import by.bsuir.Dormitory.dto.response.PrivilegeResponse;
 import by.bsuir.Dormitory.exception.PrivilegeNotFoundException;
+import by.bsuir.Dormitory.exception.RightNotFoundException;
 import by.bsuir.Dormitory.mapper.PrivilegeMapper;
 import by.bsuir.Dormitory.model.Privilege;
+import by.bsuir.Dormitory.model.Right;
 import by.bsuir.Dormitory.repository.PrivilegeRepository;
+import by.bsuir.Dormitory.repository.RightRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,7 @@ import static java.util.stream.Collectors.toList;
 public class PrivilegeService {
 
     private final PrivilegeRepository privilegeRepository;
+    private final RightRepository rightRepository;
 
     private final PrivilegeMapper privilegeMapper;
 
@@ -47,5 +51,16 @@ public class PrivilegeService {
     public void save(PrivilegeRequest privilegeRequest) {
         Privilege privilege = privilegeMapper.map(privilegeRequest);
         privilegeRepository.save(privilege);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PrivilegeResponse> getAllByRight(Long rightId) {
+        Right right = rightRepository.findById(rightId)
+                .orElseThrow(() -> new RightNotFoundException(rightId));
+
+        return privilegeRepository.findAllByRight(right)
+                .stream()
+                .map(privilegeMapper::mapToDto)
+                .collect(toList());
     }
 }

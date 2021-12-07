@@ -11,4 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ApplicationRequest {
     private String wishes;
+    private String dormitoryWish;
+    private String roomWish;
+    private String studentWish;
 }

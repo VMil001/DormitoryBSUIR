@@ -42,4 +42,10 @@ public class PrivilegeController {
         privilegeService.save(privilegeRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/by-right/{rightId}")
+    public ResponseEntity<List<PrivilegeResponse>> getAllByRight(@PathVariable Long rightId) {
+        return status(HttpStatus.OK)
+                .body(privilegeService.getAllByRight(rightId));
+    }
 }

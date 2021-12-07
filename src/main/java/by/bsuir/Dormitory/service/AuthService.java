@@ -130,9 +130,18 @@ public class AuthService {
         String token = generateVerificationToken(user);
         NotificationEmail notificationEmail = new NotificationEmail("Пожалуйста, активируйте свой аккаунт",
                 user.getEmail(),
-                "Спасибо, что выбрали нашу компанию, " +
-                        "пожалуйста, перейдите по следующей ссылке для активации своего аккаунт: " +
+                "Пожалуйста, перейдите по следующей ссылке для активации своего аккаунт: " +
                         "http://localhost:8080/auth/verification/" + token);
         mailService.sendMail(notificationEmail);
+    }
+
+    @Transactional
+    public Boolean usernameExists(String username) {
+        return userRepository.findByUsername(username).isPresent();
+    }
+
+    @Transactional
+    public Boolean emailExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 }

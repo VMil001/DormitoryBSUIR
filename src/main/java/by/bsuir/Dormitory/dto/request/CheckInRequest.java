@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApplicationStatusRequest {
+public class CheckInRequest {
+    private Long userId;
+    private String dormitoryName;
     private Long applicationId;
-    private String status;
-    private String message;
 }

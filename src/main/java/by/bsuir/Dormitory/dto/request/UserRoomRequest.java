@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserRoomRequest {
     private Long roomId;
+    private Long userId;
 }

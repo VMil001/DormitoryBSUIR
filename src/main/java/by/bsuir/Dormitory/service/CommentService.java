@@ -58,7 +58,7 @@ public class CommentService {
     public List<CommentResponse> getAllByDormitory(Long dormitoryId) {
         Dormitory dormitory = dormitoryRepository.findById(dormitoryId)
                 .orElseThrow(() -> new DormitoryNotFoundException(dormitoryId));
-        return commentRepository.findAllByDormitory(dormitory)
+        return commentRepository.findAllByDormitoryOrderByDateDesc(dormitory)
                 .stream()
                 .map(commentMapper::mapToDto)
                 .collect(toList());

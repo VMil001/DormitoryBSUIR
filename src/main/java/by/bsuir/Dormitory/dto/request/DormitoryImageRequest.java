@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApplicationStatusRequest {
-    private Long applicationId;
-    private String status;
-    private String message;
+public class DormitoryImageRequest {
+    private Long dormitoryId;
+    private String url;
 }

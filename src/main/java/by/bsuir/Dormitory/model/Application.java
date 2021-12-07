@@ -2,6 +2,8 @@ package by.bsuir.Dormitory.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,18 +24,24 @@ public class Application {
     private Long applicationId;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     private Long number;
     private Date date;
     private String wishes;
+    private String dormitoryWish;
+    private String roomWish;
+    private String studentWish;
+    private String message;
+    private Date finishDate;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
     public enum Status {
-        WAITING("В ожидании"),
-        WAITING_CANCELED("В ожидании отмены"),
+        WAITING("Подано"),
+        WAITING_CHECKIN("В ожидании заселения"),
         CANCELED("Отменено"),
         REJECTED("Отказано"),
         CONFIRMED("Подтверждено");

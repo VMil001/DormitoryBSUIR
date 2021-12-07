@@ -1,4 +1,4 @@
-package by.bsuir.Dormitory.dto.request;
+package by.bsuir.Dormitory.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApplicationStatusRequest {
-    private Long applicationId;
-    private String status;
-    private String message;
+public class DormitoryImageResponse {
+    private Long dormitoryImageId;
+    private String url;
 }

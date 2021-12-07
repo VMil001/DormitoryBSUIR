@@ -1,9 +1,6 @@
 package by.bsuir.Dormitory.controller;
 
-import by.bsuir.Dormitory.dto.request.StudentInfoRequest;
-import by.bsuir.Dormitory.dto.request.UserDormitoryRequest;
-import by.bsuir.Dormitory.dto.request.UserInfoRequest;
-import by.bsuir.Dormitory.dto.request.UserRoomRequest;
+import by.bsuir.Dormitory.dto.request.*;
 import by.bsuir.Dormitory.dto.response.UserResponse;
 import by.bsuir.Dormitory.service.UserService;
 import lombok.AllArgsConstructor;
@@ -109,30 +106,23 @@ public class UserController {
                 .body(userService.getAllManagers());
     }
 
-    @PutMapping("/students/{userId}/dormitory")
-    public ResponseEntity<UserResponse> updateStudentDormitory(@PathVariable Long userId,
-                                                               @RequestBody UserDormitoryRequest request) {
-        return status(HttpStatus.OK)
-                .body(userService.updateUserDormitory(userId, request));
-    }
-
-    @PutMapping("/students/{userId}/room")
-    public ResponseEntity<UserResponse> updateStudentRoom(@PathVariable Long userId,
-                                                          @RequestBody UserRoomRequest request) {
-        return status(HttpStatus.OK)
-                .body(userService.updateUserRoom(userId, request));
-    }
-
     @GetMapping("/students/with-room")
     public ResponseEntity<List<UserResponse>> getAllStudentsWithRoom() {
         return status(HttpStatus.OK)
                 .body(userService.getAllStudentsWithRoom());
     }
 
-    @GetMapping("/students/without-room/by-dormitory/{dormitoryId}")
+    @GetMapping("/students/by-dormitory/{dormitoryId}/without-room")
     public ResponseEntity<List<UserResponse>> getAllStudentsWithoutRoomByDormitory(@PathVariable Long dormitoryId) {
         return status(HttpStatus.OK)
                 .body(userService.getAllStudentsWithoutRoomByDormitory(dormitoryId));
+    }
+
+
+    @GetMapping("/students/by-dormitory/{dormitoryId}")
+    public ResponseEntity<List<UserResponse>> getAllStudentsByDormitory(@PathVariable Long dormitoryId) {
+        return status(HttpStatus.OK)
+                .body(userService.getAllStudentsByDormitory(dormitoryId));
     }
 
     @GetMapping("/students/without-dormitory/")
@@ -146,4 +136,35 @@ public class UserController {
         return status(HttpStatus.OK)
                 .body(userService.getStudentsQueue());
     }
+
+    @GetMapping("/current")
+    public ResponseEntity<UserResponse> getCurrent() {
+        return status(HttpStatus.OK)
+                .body(userService.getCurrent());
+    }
+
+    @PutMapping("/{userId}/update-part/imgURL")
+    public ResponseEntity<UserResponse> updateImage(@PathVariable Long userId, @RequestBody UpdatePartRequest request) {
+        return status(HttpStatus.OK)
+                .body(userService.updateImage(userId, request));
+    }
+
+    @PutMapping("/{userId}/update-part/course")
+    public ResponseEntity<UserResponse> updateCourse(@PathVariable Long userId, @RequestBody UpdatePartRequest request) {
+        return status(HttpStatus.OK)
+                .body(userService.updateCourse(userId, request));
+    }
+
+    @PutMapping("/{userId}/update-part/faculty")
+    public ResponseEntity<UserResponse> updateFaculty(@PathVariable Long userId, @RequestBody UpdatePartRequest request) {
+        return status(HttpStatus.OK)
+                .body(userService.updateFaculty(userId, request));
+    }
+
+    @PutMapping("/{userId}/update-part/group")
+    public ResponseEntity<UserResponse> updateGroup(@PathVariable Long userId, @RequestBody UpdatePartRequest request) {
+        return status(HttpStatus.OK)
+                .body(userService.updateGroup(userId, request));
+    }
+
 }

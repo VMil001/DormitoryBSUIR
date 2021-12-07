@@ -13,6 +13,7 @@ public class CommentResponse {
     private Long commentId;
     private String text;
     private String date;
-    private String user;
-    private String dormitory;
+    private String credentials;
+    private String role;
+    private String imgURL;
 }

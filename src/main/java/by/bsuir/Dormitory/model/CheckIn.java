@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Getter
@@ -15,23 +16,37 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PasswordRecovery {
+public class CheckIn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long passwordRecoveryId;
+    private Long checkInId;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Dormitory dormitory;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Room room;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-    private Long number;
+    private Date dateIn;
+    private Date dateOut;
+    private Boolean active;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Application application;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        PasswordRecovery that = (PasswordRecovery) o;
-        return passwordRecoveryId != null && Objects.equals(passwordRecoveryId, that.passwordRecoveryId);
+        CheckIn that = (CheckIn) o;
+        return checkInId != null && Objects.equals(checkInId, that.checkInId);
     }
 
     @Override

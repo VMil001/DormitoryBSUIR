@@ -3,10 +3,7 @@ package by.bsuir.Dormitory.model;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
@@ -23,6 +20,17 @@ public class Dormitory {
 
     private String name;
     private String address;
+
+    @Lob
+    @Column( length = 100000 )
+    private String info;
+
+    @Lob
+    @Column( length = 100000 )
+    private String imageURL;
+
+    @ManyToOne
+    private User manager;
 
     @Override
     public boolean equals(Object o) {

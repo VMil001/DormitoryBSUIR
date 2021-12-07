@@ -8,4 +8,7 @@ public class RightNotFoundException extends RuntimeException {
     public RightNotFoundException(Long id) {
         super("No Right found with id: " + id);
     }
+    public RightNotFoundException(String name) {
+        super("No Right found with name: " + name);
+    }
 }

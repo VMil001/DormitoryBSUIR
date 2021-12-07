@@ -49,4 +49,35 @@ public class ApplicationController {
         applicationService.changeStatus(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/current-user")
+    public ResponseEntity<ApplicationResponse> getCurrentUserApplication() {
+        return status(HttpStatus.OK)
+                .body(applicationService.getByCurrentUser());
+    }
+
+    @GetMapping("/by-user/{userId}")
+    public ResponseEntity<List<ApplicationResponse>> getAllByUser(@PathVariable Long userId) {
+        return status(HttpStatus.OK)
+                .body(applicationService.getAllByUser(userId));
+    }
+
+    @GetMapping("/by-current-user")
+    public ResponseEntity<List<ApplicationResponse>> getAllByCurrentUser() {
+        return status(HttpStatus.OK)
+                .body(applicationService.getAllByCurrentUser());
+    }
+
+    @GetMapping("/by-status/{type}")
+    public ResponseEntity<List<ApplicationResponse>> getAllByStatus(@PathVariable String type) {
+        return status(HttpStatus.OK)
+                .body(applicationService.getAllByStatus(type));
+    }
+
+    @GetMapping("/by-status/{type}/count")
+    public ResponseEntity<Long> countByStatus(@PathVariable String type) {
+        return status(HttpStatus.OK)
+                .body(applicationService.countByStatus(type));
+    }
+
 }
